@@ -1,0 +1,40 @@
+<resources>
+
+    <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="navigationIcon">@drawable/ic_common_back</item>
+    </style>
+
+    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar" />
+
+    <style name="ThemeOverlay.Light" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ThemeOverlay.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+    <style name="ThemeOverlay.Dark.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ThemeOverlay.Dark.ActionBar.WhiteAccent" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
+    <style name="Base.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">?attr/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Transparent.Dialog" parent="Base.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="Completely.Transparent.Dialog" parent="Transparent.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

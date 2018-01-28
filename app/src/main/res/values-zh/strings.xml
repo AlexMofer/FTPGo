@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_start">启动</string>
+    <string name="main_stop">停止</string>
+    <string name="main_settings">设置</string>
+    <string name="main_toast_no_wifi">未连接到WIFI网络</string>
+
+    <string name="notification_name_low">服务通知</string>
+
+    <string name="ftp_notification_title">已启动 FTP 服务器</string>
+    <string name="ftp_notification_text">访问 ftp://%1$s:%2$d/ 进行文件传输。</string>
+
+    <string name="switcher_shortcuts_long">启动或者关闭 FTP 文件传输服务</string>
+    <string name="switcher_shortcuts_short">开关 FTP</string>
+    <string name="switcher_toast_start">正在启动 FTP 服务&#8230;</string>
+    <string name="switcher_toast_stop">正在停止 FTP 服务&#8230;</string>
+</resources>

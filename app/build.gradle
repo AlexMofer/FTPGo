@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    signingConfigs {
+        Release {
+            keyAlias 'projectx'
+            keyPassword 'alexpx'
+            storeFile file('Alex.jks')
+            storePassword 'alex0330'
+        }
+    }
+    defaultConfig {
+        applicationId "am.project.ftpgo"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+            signingConfig signingConfigs.Release
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'am.util:mvp:27.0.2'
+    implementation 'am.util:ftpserver:1.1.1.1'
+}
