@@ -18,7 +18,6 @@
         <activity android:name=".business.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -37,14 +36,21 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-
         <service
             android:name=".business.ftp.FTPService"
             android:exported="false" />
-
         <activity
             android:name=".business.switcher.SwitcherActivity"
             android:theme="@style/Completely.Transparent.Dialog" />
+        <service
+            android:name=".business.ftp.FTPTileService"
+            android:icon="@drawable/ic_tile_ftp_inactive"
+            android:label="@string/ftp_tile_label_inactive"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

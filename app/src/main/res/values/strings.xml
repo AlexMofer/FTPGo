@@ -9,6 +9,8 @@
 
     <string name="ftp_notification_title">FTP server started</string>
     <string name="ftp_notification_text">Access ftp://%1$s:%2$d/ for file transfer.</string>
+    <string name="ftp_tile_label_active">FTP Running&#8230;</string>
+    <string name="ftp_tile_label_inactive">FTP Go</string>
 
     <string name="switcher_shortcuts_long">Turn on or off the FTP file transfer service</string>
     <string name="switcher_shortcuts_short">FTP Switcher</string>
