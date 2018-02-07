@@ -3,21 +3,19 @@ package am.project.ftpgo.business.main;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-import am.project.ftpgo.FTPApplication;
 import am.project.ftpgo.R;
 import am.project.ftpgo.action.LocalActions;
 import am.project.ftpgo.business.BaseActivity;
 import am.project.ftpgo.business.ftp.FTPService;
 import am.project.ftpgo.util.ContextUtils;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected int getContentViewLayout() {
@@ -29,6 +27,8 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(R.id.main_toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        View mSwitch = findViewById(R.id.main_v_switch);
+        mSwitch.setOnClickListener(this);
     }
 
     @Override
@@ -46,41 +46,33 @@ public class MainActivity extends BaseActivity {
             return;
         switch (action) {
             case LocalActions.ACTION_FTP_STARTED:
+                // TODO 启动
+                break;
             case LocalActions.ACTION_FTP_STOPPED:
-                invalidateOptionsMenu();
+                // TODO 关闭
                 break;
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        boolean isStarted = FTPService.isStarted();
-        final MenuItem starter = menu.findItem(R.id.menu_main_start);
-        final MenuItem stopper = menu.findItem(R.id.menu_main_stop);
-        starter.setEnabled(true);
-        stopper.setEnabled(true);
-        if (isStarted) {
-            starter.setVisible(false);
-            stopper.setVisible(true);
-        } else {
-            starter.setVisible(true);
-            stopper.setVisible(false);
+    public void onRequestWriteExternalStoragePermissionsResult(boolean granted) {
+        super.onRequestWriteExternalStoragePermissionsResult(granted);
+        if (granted) {
+            start();
         }
-        return super.onCreateOptionsMenu(menu);
     }
 
+    // Listener
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_main_start:
-                start();
-                return true;
-            case R.id.menu_main_stop:
-                stop();
-                return true;
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main_v_switch:
+                if (FTPService.isStarted())
+                    stop();
+                else
+                    start();
+                break;
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void start() {
@@ -101,25 +93,5 @@ public class MainActivity extends BaseActivity {
         if (FTPService.isStarted()) {
             FTPService.stop(this);
         }
-    }
-
-    @Override
-    public void onRequestWriteExternalStoragePermissionsResult(boolean granted) {
-        super.onRequestWriteExternalStoragePermissionsResult(granted);
-        if (granted) {
-            start();
-        }
-    }
-
-    /**
-     * 重启应用
-     *
-     * @param context Context
-     */
-    public static void restart(Context context) {
-        FTPApplication.sendLocalBroadcast(LocalActions.ACTION_STOP_ALL_ACTIVITY);
-        Intent starter = new Intent(context, MainActivity.class);
-        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(starter);
     }
 }

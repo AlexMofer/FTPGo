@@ -1,15 +1,9 @@
 package am.project.ftpgo.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
-import android.os.StrictMode;
-import android.support.annotation.RequiresApi;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 /**
  * Context 工具类
@@ -56,5 +50,16 @@ public class ContextUtils {
                 + (0xFF & ip >> 24);
     }
 
-
+    /**
+     * 获取启动Intent
+     *
+     * @param context Context
+     * @return 启动Intent
+     */
+    @SuppressWarnings("ConstantConditions")
+    public static Intent getLaunchIntent(Context context) {
+        return context.getPackageManager().getLaunchIntentForPackage(
+                context.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 }

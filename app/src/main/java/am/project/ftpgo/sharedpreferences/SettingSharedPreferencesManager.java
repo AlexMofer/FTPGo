@@ -6,8 +6,6 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public final class SettingSharedPreferencesManager {
      */
     private static SharedPreferences getSharedPreferences(Context context) {
         if (context == null) {
-            context = FTPApplication.getContext();
+            context = FTPApplication.getInstance();
         }
         return context.getSharedPreferences(SP_NAME, SP_MODE);
     }

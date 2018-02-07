@@ -3,13 +3,12 @@ package am.project.ftpgo.notification;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import am.project.ftpgo.R;
-import am.project.ftpgo.action.GlobalActions;
+import am.project.ftpgo.util.ContextUtils;
 
 /**
  * 通知构造器
@@ -19,9 +18,8 @@ public class NotificationMaker {
 
     public static final int ID_FTP = 1;
 
+
     public static Notification getFTPRunning(Context context, String title, String text) {
-        final PendingIntent intent = PendingIntent.getBroadcast(context, ID_FTP,
-                new Intent(GlobalActions.ACTION_RESTART), PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,
                 NotificationChannelHelper.getChannelLow(context))
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
@@ -36,13 +34,8 @@ public class NotificationMaker {
                 .setOngoing(true)
                 .setContentTitle(title)
                 .setContentText(text)
-                .setContentIntent(intent);
+                .setContentIntent(PendingIntent.getActivity(context, ID_FTP,
+                        ContextUtils.getLaunchIntent(context), PendingIntent.FLAG_UPDATE_CURRENT));
         return builder.build();
-    }
-
-    @SuppressWarnings("unused")
-    private static PendingIntent getEmptyIntent(Context context) {
-        return PendingIntent.getActivity(context, 0,
-                new Intent(), PendingIntent.FLAG_ONE_SHOT);
     }
 }

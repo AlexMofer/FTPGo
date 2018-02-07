@@ -27,7 +27,6 @@ public abstract class BaseActivity extends AMAppCompatActivity {
     protected void onAddLocalAction(IntentFilter filter) {
         super.onAddLocalAction(filter);
         filter.addAction(LocalActions.ACTION_WRITE_EXTERNAL_STORAGE_PERMISSION_GRANTED);
-        filter.addAction(LocalActions.ACTION_STOP_ALL_ACTIVITY);
     }
 
     @Override
@@ -40,9 +39,6 @@ public abstract class BaseActivity extends AMAppCompatActivity {
             case LocalActions.ACTION_WRITE_EXTERNAL_STORAGE_PERMISSION_GRANTED:
                 onWriteExternalStoragePermissionGranted();
                 break;
-            case LocalActions.ACTION_STOP_ALL_ACTIVITY:
-                dispatchStopBroadcastReceive();
-                break;
         }
     }
 
@@ -50,24 +46,6 @@ public abstract class BaseActivity extends AMAppCompatActivity {
      * 文件读写权限已授予
      */
     protected void onWriteExternalStoragePermissionGranted() {
-    }
-
-    /**
-     * 处理退出广播
-     */
-    protected void dispatchStopBroadcastReceive() {
-        if (onStopBroadcastReceive()) {
-            finish();
-        }
-    }
-
-    /**
-     * 接收到退出广播
-     *
-     * @return 是否退出
-     */
-    protected boolean onStopBroadcastReceive() {
-        return true;
     }
 
     /**

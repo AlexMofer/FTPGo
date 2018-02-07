@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".business.main.MainActivity">
 
     <android.support.v7.widget.Toolbar
@@ -13,4 +14,13 @@
         app:popupTheme="@style/ThemeOverlay.Light"
         app:theme="@style/ThemeOverlay.Dark.ActionBar" />
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/main_v_switch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:contentDescription="@string/switcher_shortcuts_short"
+        android:focusable="true"
+        android:foreground="?selectableItemBackgroundBorderless" />
+
+</LinearLayout>

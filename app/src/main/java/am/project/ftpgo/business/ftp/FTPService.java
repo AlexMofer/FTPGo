@@ -27,6 +27,7 @@ public class FTPService extends Service {
     private static boolean STARTED = false;
 
     private FtpServer mFTP;
+    private boolean mAutoClose = false;
     private final BroadcastReceiver mBroadcastReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -36,9 +37,22 @@ public class FTPService extends Service {
                     }
                 }
             };
-    private boolean mAutoClose = false;
 
     public FTPService() {
+    }
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, FTPService.class);
+        context.startService(starter);
+    }
+
+    public static void stop(Context context) {
+        Intent stopper = new Intent(context, FTPService.class);
+        context.stopService(stopper);
+    }
+
+    public static boolean isStarted() {
+        return STARTED;
     }
 
     @Override
@@ -48,7 +62,7 @@ public class FTPService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (STARTED) {
+        if (STARTED || !FTPApplication.hasWriteExternalStoragePermission()) {
             return super.onStartCommand(intent, flags, startId);
         }
         int port = SettingSharedPreferencesManager.getPort(this);
@@ -116,19 +130,5 @@ public class FTPService extends Service {
         if (mAutoClose && !ContextUtils.isWifiConnected(this)) {
             stopSelf();
         }
-    }
-
-    public static void start(Context context) {
-        Intent starter = new Intent(context, FTPService.class);
-        context.startService(starter);
-    }
-
-    public static void stop(Context context) {
-        Intent stopper = new Intent(context, FTPService.class);
-        context.stopService(stopper);
-    }
-
-    public static boolean isStarted() {
-        return STARTED;
     }
 }

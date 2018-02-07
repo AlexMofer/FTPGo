@@ -10,10 +10,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
 
-import am.project.ftpgo.action.GlobalActions;
-import am.project.ftpgo.business.main.MainActivity;
 import am.project.ftpgo.notification.NotificationChannelHelper;
 import am.project.ftpgo.sharedpreferences.TempSharedPreferencesManager;
 
@@ -25,18 +22,7 @@ public class FTPApplication extends Application {
 
     private static LocalBroadcastManager mLocalBroadcastManager;// 应用内部广播
     @SuppressWarnings("all")
-    private static Context mContext;
-
-    private final BroadcastReceiver mBroadcastReceiver =
-            new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    final String action = intent.getAction();
-                    if (action == null)
-                        return;
-                    onReceiveBroadcast(intent);
-                }
-            };
+    private static FTPApplication mApplication;
 
     private final BroadcastReceiver mLocalBroadcastReceiver =
             new BroadcastReceiver() {
@@ -47,63 +33,12 @@ public class FTPApplication extends Application {
             };
 
     /**
-     * 接收到广播
+     * 获取Application
      *
-     * @param intent 意图
+     * @return Application
      */
-    protected void onReceiveBroadcast(Intent intent) {
-        final String action = intent.getAction();
-        if (TextUtils.isEmpty(action))
-            return;
-        switch (action) {
-            case GlobalActions.ACTION_RESTART:
-                if (TempSharedPreferencesManager.isAppOnForeground(mContext)) {
-                    return;
-                }
-                MainActivity.restart(mContext);
-                break;
-        }
-    }
-
-    /**
-     * 接收到本地广播
-     *
-     * @param context Context
-     * @param intent  意图
-     */
-    protected void onReceiveLocalBroadcast(Context context, Intent intent) {
-
-    }
-
-    @Override
-    public void onCreate() {
-        mContext = getApplicationContext();
-        TempSharedPreferencesManager.resetForegroundActivity(mContext);
-        super.onCreate();
-        final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(GlobalActions.ACTION_RESTART);
-        registerReceiver(mBroadcastReceiver, intentFilter);
-
-        mLocalBroadcastManager = LocalBroadcastManager.getInstance(mContext);
-        final IntentFilter localIntentFilter = new IntentFilter();
-        mLocalBroadcastManager.registerReceiver(mLocalBroadcastReceiver, localIntentFilter);
-        NotificationChannelHelper.updateNotificationChannel(this);
-    }
-
-    @Override
-    public void onTerminate() {
-        unregisterReceiver(mBroadcastReceiver);
-        mLocalBroadcastManager.unregisterReceiver(mLocalBroadcastReceiver);
-        super.onTerminate();
-    }
-
-    /**
-     * 获取应用级 Context
-     *
-     * @return Application 级别的 Context
-     */
-    public static Context getContext() {
-        return mContext;
+    public static FTPApplication getInstance() {
+        return mApplication;
     }
 
     /**
@@ -130,8 +65,37 @@ public class FTPApplication extends Application {
      * @return 是否拥有权限
      */
     public static boolean hasWriteExternalStoragePermission() {
-        return Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(mContext,
+        return Build.VERSION.SDK_INT < 23 || ActivityCompat.checkSelfPermission(getInstance(),
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    /**
+     * 接收到本地广播
+     *
+     * @param context Context
+     * @param intent  意图
+     */
+    @SuppressWarnings("unused")
+    protected void onReceiveLocalBroadcast(Context context, Intent intent) {
+
+    }
+
+    @Override
+    public void onCreate() {
+        mApplication = this;
+        TempSharedPreferencesManager.resetForegroundActivity(this);
+        super.onCreate();
+
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
+        final IntentFilter localIntentFilter = new IntentFilter();
+        mLocalBroadcastManager.registerReceiver(mLocalBroadcastReceiver, localIntentFilter);
+        NotificationChannelHelper.updateNotificationChannel(this);
+    }
+
+    @Override
+    public void onTerminate() {
+        mLocalBroadcastManager.unregisterReceiver(mLocalBroadcastReceiver);
+        super.onTerminate();
     }
 }

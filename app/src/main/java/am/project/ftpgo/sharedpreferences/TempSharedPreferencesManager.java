@@ -28,7 +28,7 @@ public final class TempSharedPreferencesManager {
      */
     private static SharedPreferences getSharedPreferences(Context context) {
         if (context == null) {
-            context = FTPApplication.getContext();
+            context = FTPApplication.getInstance();
         }
         return context.getSharedPreferences(SP_NAME, SP_MODE);
     }
