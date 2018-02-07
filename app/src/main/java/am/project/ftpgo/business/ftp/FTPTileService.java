@@ -40,11 +40,11 @@ public class FTPTileService extends TileService {
     private void updateTile(boolean active) {
         final Tile tile = getQsTile();
         if (active) {
-            tile.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_ftp_open));
+            tile.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_ftp_active));
             tile.setLabel(getString(R.string.ftp_tile_label_active));
             tile.setState(Tile.STATE_ACTIVE);
         } else {
-            tile.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_ftp_close));
+            tile.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_ftp_inactive));
             tile.setLabel(getString(R.string.ftp_tile_label_inactive));
             tile.setState(Tile.STATE_INACTIVE);
         }
