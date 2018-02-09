@@ -67,12 +67,12 @@ public class FTPService extends Service {
         }
         int port = SettingSharedPreferencesManager.getPort(this);
         if (port < 0 || port > 65535) {
-            port = 8888;
+            port = 2020;
         }
         while (!Utils.isPortAvailable(port)) {
             port++;
             if (port > 65535) {
-                port = 8888;
+                port = 2020;
                 break;
             }
         }

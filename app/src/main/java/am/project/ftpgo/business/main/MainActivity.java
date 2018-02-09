@@ -17,6 +17,8 @@ import am.project.ftpgo.util.ContextUtils;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
+    private View mSwitch;
+
     @Override
     protected int getContentViewLayout() {
         return R.layout.activity_main;
@@ -27,7 +29,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setSupportActionBar(R.id.main_toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        View mSwitch = findViewById(R.id.main_v_switch);
+        mSwitch = findViewById(R.id.main_v_switch);
         mSwitch.setOnClickListener(this);
     }
 
@@ -46,10 +48,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             return;
         switch (action) {
             case LocalActions.ACTION_FTP_STARTED:
-                // TODO 启动
+                mSwitch.setActivated(true);
                 break;
             case LocalActions.ACTION_FTP_STOPPED:
-                // TODO 关闭
+                mSwitch.setActivated(false);
                 break;
         }
     }
