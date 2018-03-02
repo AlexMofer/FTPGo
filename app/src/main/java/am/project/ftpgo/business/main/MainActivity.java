@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         mSwitch = findViewById(R.id.main_v_switch);
         mSwitch.setOnClickListener(this);
+        mSwitch.setActivated(FTPService.isStarted());
     }
 
     @Override
@@ -48,10 +49,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             return;
         switch (action) {
             case LocalActions.ACTION_FTP_STARTED:
-                mSwitch.setActivated(true);
-                break;
             case LocalActions.ACTION_FTP_STOPPED:
-                mSwitch.setActivated(false);
+                mSwitch.setActivated(FTPService.isStarted());
                 break;
         }
     }
