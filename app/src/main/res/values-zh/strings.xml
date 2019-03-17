@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="main_settings">设置</string>
     <string name="main_toast_no_wifi">未连接到WIFI网络</string>
 
     <string name="notification_name_low">服务通知</string>
@@ -14,4 +13,11 @@
     <string name="switcher_shortcuts_short">开关 FTP</string>
     <string name="switcher_toast_start">正在启动 FTP 服务&#8230;</string>
     <string name="switcher_toast_stop">正在停止 FTP 服务&#8230;</string>
+
+    <string name="about_label">关于</string>
+    <string name="about_info">FTP Go为一款在Android设备上搭建FTP服务端的应用，旨在帮助用户在局域网中共享文件。FTP服务端的跨平台性、易操作性使用户文件共享更加便捷。您可以在电脑端像访问你的磁盘一样访问您的手机存储，而并不用借助数据线。</string>
+    <string name="about_more">您可以在Github项目主页对此应用提出意见与建议：</string>
+    <string name="about_privacy">隐私权政策</string>
+
+    <string name="settings_label">设置</string>
 </resources>

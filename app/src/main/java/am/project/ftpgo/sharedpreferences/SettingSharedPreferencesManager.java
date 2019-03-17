@@ -3,7 +3,6 @@ package am.project.ftpgo.sharedpreferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.List;
 import am.project.ftpgo.FTPApplication;
 import am.project.ftpgo.util.Utils;
 import am.util.ftpserver.FTPUser;
+import androidx.annotation.Nullable;
 
 /**
  * 设置SP数据

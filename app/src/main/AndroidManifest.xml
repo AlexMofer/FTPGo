@@ -3,6 +3,7 @@
     package="am.project.ftpgo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 危险权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -15,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.main.MainActivity">
+        <activity
+            android:name=".business.main.MainActivity"
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,15 +40,17 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+        <activity
+            android:name=".business.switcher.SwitcherActivity"
+            android:theme="@style/Completely.Transparent.Dialog" />
+        <activity
+            android:name=".business.about.AboutActivity"
+            android:label="@string/about_label" />
+        <activity android:name=".business.browser.BrowserActivity" />
 
         <service
             android:name=".business.ftp.FTPService"
             android:exported="false" />
-
-        <activity
-            android:name=".business.switcher.SwitcherActivity"
-            android:theme="@style/Completely.Transparent.Dialog" />
-
         <service
             android:name=".business.ftp.FTPTileService"
             android:icon="@drawable/ic_tile_ftp_inactive"

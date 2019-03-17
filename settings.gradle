@@ -1,1 +1,1 @@
-include ':app', ':core', ':ftpserver'
+include ':app'

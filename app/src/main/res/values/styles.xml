@@ -3,7 +3,7 @@
     <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:fitsSystemWindows">true</item>
-        <item name="navigationIcon">@drawable/ic_common_back</item>
+        <item name="navigationIcon">?homeAsUpIndicator</item>
     </style>
 
     <style name="Widget.Toolbar" parent="Base.Widget.Toolbar" />

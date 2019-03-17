@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">FTP Go</string>
+
+    <string name="about_version" translatable="false">V%1$s</string>
+    <string name="about_url" translatable="false">https://github.com/AlexMofer/FTPGo</string>
+    <string name="about_copyright" translatable="false">Copyright © 2019 AlexMofer All rights reserved.</string>
 </resources>

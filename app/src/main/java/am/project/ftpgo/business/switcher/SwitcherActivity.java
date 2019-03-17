@@ -1,7 +1,5 @@
 package am.project.ftpgo.business.switcher;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,6 +7,7 @@ import am.project.ftpgo.R;
 import am.project.ftpgo.business.BaseActivity;
 import am.project.ftpgo.business.ftp.FTPService;
 import am.project.ftpgo.util.ContextUtils;
+import androidx.annotation.Nullable;
 
 public class SwitcherActivity extends BaseActivity {
 

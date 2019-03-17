@@ -4,9 +4,9 @@ package am.project.ftpgo.business.ftp;
 import android.graphics.drawable.Icon;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.support.annotation.RequiresApi;
 
 import am.project.ftpgo.R;
+import androidx.annotation.RequiresApi;
 
 @RequiresApi(24)
 public class FTPTileService extends TileService {

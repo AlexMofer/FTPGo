@@ -6,13 +6,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.text.TextUtils;
 
 import am.project.ftpgo.action.LocalActions;
 import am.project.ftpgo.sharedpreferences.TempSharedPreferencesManager;
 import am.util.mvp.AMAppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 /**
  * 基础框架Activity
@@ -33,12 +32,8 @@ public abstract class BaseActivity extends AMAppCompatActivity {
     protected void onReceiveLocalBroadcast(Context context, Intent intent) {
         super.onReceiveLocalBroadcast(context, intent);
         final String action = intent.getAction();
-        if (TextUtils.isEmpty(action))
-            return;
-        switch (action) {
-            case LocalActions.ACTION_WRITE_EXTERNAL_STORAGE_PERMISSION_GRANTED:
-                onWriteExternalStoragePermissionGranted();
-                break;
+        if (LocalActions.ACTION_WRITE_EXTERNAL_STORAGE_PERMISSION_GRANTED.equals(action)) {
+            onWriteExternalStoragePermissionGranted();
         }
     }
 
@@ -53,6 +48,7 @@ public abstract class BaseActivity extends AMAppCompatActivity {
      *
      * @return 是否拥有权限
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected final boolean hasWriteExternalStoragePermission() {
         return Build.VERSION.SDK_INT < 23 ||
                 isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE);

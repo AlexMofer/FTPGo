@@ -1,28 +1,27 @@
 package am.project.ftpgo;
 
-import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.LocalBroadcastManager;
 
 import am.project.ftpgo.notification.NotificationChannelHelper;
 import am.project.ftpgo.sharedpreferences.TempSharedPreferencesManager;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.multidex.MultiDexApplication;
 
 /**
  * 自定义Application，可定义应用全局共享变量
  * Created by Alex on 2017/12/15.
  */
-public class FTPApplication extends Application {
+public class FTPApplication extends MultiDexApplication {
 
-    private static LocalBroadcastManager mLocalBroadcastManager;// 应用内部广播
-    @SuppressWarnings("all")
     private static FTPApplication mApplication;
+    private LocalBroadcastManager mLocalBroadcastManager;// 应用内部广播
 
     private final BroadcastReceiver mLocalBroadcastReceiver =
             new BroadcastReceiver() {
@@ -56,7 +55,7 @@ public class FTPApplication extends Application {
      * @param intent Intent
      */
     public static void sendLocalBroadcast(@NonNull Intent intent) {
-        mLocalBroadcastManager.sendBroadcast(intent);
+        getInstance().mLocalBroadcastManager.sendBroadcast(intent);
     }
 
     /**

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="main_settings">Settings</string>
     <string name="main_toast_no_wifi">Not connected to WIFI network</string>
 
     <string name="notification_name_low">Server Notification</string>
@@ -14,4 +13,11 @@
     <string name="switcher_shortcuts_short">FTP Switcher</string>
     <string name="switcher_toast_start">Starting FTP service&#8230;</string>
     <string name="switcher_toast_stop">Stopping FTP service&#8230;</string>
+
+    <string name="about_label">About</string>
+    <string name="about_info">FTP Go is an application that builds an FTP server on an Android device to help users share files on the LAN. The cross-platform and easy-to-operate nature of the FTP server makes user file sharing more convenient. You can access your phone\'s storage on your computer like you access your disk without using a data cable.</string>
+    <string name="about_more">Please comment on Github:</string>
+    <string name="about_privacy">Privacy Policy</string>
+
+    <string name="settings_label">Settings</string>
 </resources>
